@@ -114,5 +114,3 @@ It features separate **user** and **admin** dashboards, allowing users to browse
 
 ---
 
-
-This project is licensed under the **MIT License**.
