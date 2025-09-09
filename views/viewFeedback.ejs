@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Received</title>
+    <style>
+        /* General Body Styling */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #121212;
+            font-family: Arial, sans-serif;
+            color: #f5f5f5;
+        }
+
+        /* Container */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            background-color: #1e1e1e;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .header h2 {
+            color: #ffa500;
+        }
+
+        .header button {
+            background-color: #ffa500;
+            color: #121212;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .header button:hover {
+            background-color: #ff7f00;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            overflow: hidden;
+        }
+
+        table th, table td {
+            text-align: left;
+            padding: 0.75rem;
+            border-bottom: 1px solid #333;
+        }
+
+        table th {
+            background-color: #2b2b2b;
+            color: #ffa500;
+            font-weight: bold;
+        }
+
+        table tr:hover {
+            background-color: #2b2b2b;
+        }
+
+        table td {
+            color: #f5f5f5;
+        }
+
+        table td:last-child {
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            table th, table td {
+                font-size: 0.85rem;
+                padding: 0.5rem;
+            }
+
+            .header h2 {
+                font-size: 1.5rem;
+            }
+
+            .header button {
+                font-size: 0.9rem;
+                padding: 0.4rem 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Feedback Received</h2>
+            <button onclick="window.location.href='/admin/dashboard'">Return to Dashboard</button>
+        </div>
+        <table>
+            <tr>
+                <th>Feedback ID</th>
+                <th>Vehicle</th>
+                <th>User</th>
+                <th>Comments</th>
+                <th>Date</th>
+            </tr>
+            <% feedbacks.forEach(feedback => { %>
+                <tr>
+                    <td><%= feedback.f_id %></td>
+                    <td><%= feedback.v_name %></td>
+                    <td><%= feedback.user_name %></td>
+                    <td><%= feedback.comments %></td>
+                    <td><%= feedback.created_at %></td>
+                </tr>
+            <% }); %>
+        </table>
+    </div>
+</body>
+</html>

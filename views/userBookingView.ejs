@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background-color: #1e1e1e; /* Slightly lighter dark for contrast */
+            border-bottom: 1px solid #333;
+        }
+
+        header a {
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #007bff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        header a:hover {
+            background-color: #0056b3;
+        }
+
+        .booking-details {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #292929;
+            border-radius: 10px;
+        }
+
+        .booking-details h2 {
+            margin-bottom: 10px;
+        }
+
+        .booking-details p {
+            margin: 5px 0;
+        }
+
+        .highlight {
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .booking-details button {
+            background-color: #ffa500;
+            color: #121212;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 10px;
+        }
+
+        .booking-details button:hover {
+            background-color: #e69500;
+            transform: scale(1.05);
+        }
+
+        .booking-details button:active {
+            transform: scale(0.95);
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background-color: #444;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .booking-details button {
+                font-size: 0.9rem;
+                padding: 8px 16px;
+            }
+
+            header a {
+                font-size: 0.9rem;
+                padding: 8px 16px;
+            }
+
+        }
+
+        #done{
+            color:greenyellow;
+        }
+    </style>
+</head>
+<body>
+    <header><a href="/home">Return Home</a></header>
+    <div class="container">
+        <h1>Your Booking Details</h1>
+        <div class="booking-details">
+            <% if (bookings.length > 0) { %>
+                <% bookings.reverse().forEach(b => { %>
+                    <h2>Booking Information</h2>
+                    <p><strong>Booking ID:</strong> <span class="highlight"><%= b.book_id %></span></p>
+                    <p><strong>Booking Date:</strong> <span class="highlight"><%= b.book_date %></span></p>
+                    <p><strong>Destination:</strong> <span class="highlight"><%= b.destination %></span></p>
+                    <p><strong>Return Date:</strong> <span class="highlight"><%= b.return_date %></span></p>
+                    <p><strong>Booking Status:</strong> <span class="highlight"><%= b.booking_status %></span></p>
+
+                    <h2>Vehicle Information</h2>
+                    <p><strong>Vehicle Name:</strong> <span class="highlight"><%= b.v_name %></span></p>
+                    <p><strong>Vehicle Type:</strong> <span class="highlight"><%= b.v_type %></span></p>
+
+                    <h2>Payment Information</h2>
+                    <p><strong>Total Price:</strong> <span class="highlight">$<%= b.total_price %></span></p>
+                    <p><strong>Payment Method:</strong> <span class="highlight"><%= b.payment_method %></span></p>
+                    
+                    <% if (!b.feedback_exists) { %>
+                        <button onclick="location.href='/give-feedback/<%= b.v_id %>?admin_id=<%= b.a_id %>&book_id=<%= b.book_id %>'">
+                            Give Feedback
+                        </button>
+                    <% } else { %>
+                        <p id="done"><strong>Feedback Status:</strong> Feedback Submitted</p>
+                    <% } %>
+                    <hr>
+                <% }); %>
+            <% } else { %>
+                <p><center>No bookings found</center></p>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>
